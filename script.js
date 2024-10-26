@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     const customCursor = document.getElementById('custom-cursor');
+    const imageGallery = document.querySelector('.image-gallery');
+    let isOverImage = false;
+    let cursorHideTimeout;
     
-    if (!customCursor) {
-        console.error('Custom cursor element not found!');
+    if (!customCursor || !imageGallery) {
+        console.error('Custom cursor or image gallery element not found!');
         return;
     }
 
@@ -11,27 +14,42 @@ document.addEventListener('DOMContentLoaded', function() {
         customCursor.style.top = `${e.clientY}px`;
     }
 
-    function showCursor() {
+    function showCursor(text) {
+        clearTimeout(cursorHideTimeout);
+        customCursor.textContent = text;
         customCursor.style.opacity = '1';
         customCursor.style.display = 'block';
     }
 
     function hideCursor() {
-        customCursor.style.opacity = '0';
-        setTimeout(() => {
-            customCursor.style.display = 'none';
-        }, 300); // Match this to your transition time
+        cursorHideTimeout = setTimeout(() => {
+            customCursor.style.opacity = '0';
+            setTimeout(() => {
+                if (!isOverImage) {
+                    customCursor.style.display = 'none';
+                }
+            }, 300); // Match this to your transition time
+        }, 50); // Small delay to prevent flickering
     }
 
-    document.querySelectorAll('.image-gallery img').forEach(img => {
-        img.addEventListener('mouseenter', (e) => {
-            const cursorText = e.target.getAttribute('data-cursor-text');
-            customCursor.textContent = cursorText;
-            showCursor();
-        });
-
-        img.addEventListener('mousemove', updateCursorPosition);
-
-        img.addEventListener('mouseleave', hideCursor);
+    imageGallery.addEventListener('mousemove', (e) => {
+        updateCursorPosition(e);
+        const target = e.target;
+        if (target.tagName === 'IMG') {
+            isOverImage = true;
+            const cursorText = target.getAttribute('data-cursor-text');
+            showCursor(cursorText);
+        } else {
+            isOverImage = false;
+            hideCursor();
+        }
     });
+
+    imageGallery.addEventListener('mouseleave', () => {
+        isOverImage = false;
+        hideCursor();
+    });
+
+    // Update cursor position even when not over images
+    document.addEventListener('mousemove', updateCursorPosition);
 });
