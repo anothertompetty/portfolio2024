@@ -18,14 +18,11 @@ body {
     height: 200px;
     object-fit: cover;
     transition: transform 0.3s ease;
+    cursor: none; /* Hide default cursor only on images */
 }
 
 .image-gallery img:hover {
     transform: scale(1.05);
-}
-
-body, .image-gallery img {
-    cursor: none;
 }
 
 #custom-cursor {
@@ -41,4 +38,5 @@ body, .image-gallery img {
     z-index: 9999;
     opacity: 0;
     transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    display: none; /* Hide cursor by default */
 }

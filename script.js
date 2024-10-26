@@ -13,37 +13,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showCursor() {
         customCursor.style.opacity = '1';
+        customCursor.style.display = 'block';
     }
 
     function hideCursor() {
         customCursor.style.opacity = '0';
+        setTimeout(() => {
+            customCursor.style.display = 'none';
+        }, 300); // Match this to your transition time
     }
-
-    // Show cursor when mouse enters the window
-    document.addEventListener('mouseenter', showCursor);
-
-    // Hide cursor when mouse leaves the window
-    document.addEventListener('mouseleave', hideCursor);
-
-    // Update cursor position
-    document.addEventListener('mousemove', updateCursorPosition);
-
-    // Default cursor text
-    customCursor.textContent = '•';
 
     document.querySelectorAll('.image-gallery img').forEach(img => {
         img.addEventListener('mouseenter', (e) => {
             const cursorText = e.target.getAttribute('data-cursor-text');
             customCursor.textContent = cursorText;
+            showCursor();
         });
 
-        img.addEventListener('mouseleave', () => {
-            customCursor.textContent = '•';
-        });
+        img.addEventListener('mousemove', updateCursorPosition);
+
+        img.addEventListener('mouseleave', hideCursor);
     });
-
-    // Show cursor initially if mouse is already in the window
-    if (document.hasFocus()) {
-        showCursor();
-    }
 });
