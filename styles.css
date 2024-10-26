@@ -24,6 +24,10 @@ body {
     transform: scale(1.05);
 }
 
+body, .image-gallery img {
+    cursor: none;
+}
+
 #custom-cursor {
     position: fixed;
     pointer-events: none;

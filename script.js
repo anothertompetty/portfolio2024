@@ -6,41 +6,44 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    let cursorVisible = false;
-    let cursorHidden = null;
+    function updateCursorPosition(e) {
+        customCursor.style.left = `${e.clientX}px`;
+        customCursor.style.top = `${e.clientY}px`;
+    }
 
     function showCursor() {
-        if (!cursorVisible) {
-            cursorVisible = true;
-            customCursor.style.opacity = '1';
-        }
-        if (cursorHidden) {
-            clearTimeout(cursorHidden);
-            cursorHidden = null;
-        }
+        customCursor.style.opacity = '1';
     }
 
     function hideCursor() {
-        if (cursorVisible && !cursorHidden) {
-            cursorHidden = setTimeout(() => {
-                customCursor.style.opacity = '0';
-                cursorVisible = false;
-                cursorHidden = null;
-            }, 300);
-        }
+        customCursor.style.opacity = '0';
     }
 
+    // Show cursor when mouse enters the window
+    document.addEventListener('mouseenter', showCursor);
+
+    // Hide cursor when mouse leaves the window
+    document.addEventListener('mouseleave', hideCursor);
+
+    // Update cursor position
+    document.addEventListener('mousemove', updateCursorPosition);
+
+    // Default cursor text
+    customCursor.textContent = '•';
+
     document.querySelectorAll('.image-gallery img').forEach(img => {
-        img.addEventListener('mousemove', (e) => {
+        img.addEventListener('mouseenter', (e) => {
             const cursorText = e.target.getAttribute('data-cursor-text');
             customCursor.textContent = cursorText;
-            customCursor.style.left = `${e.clientX}px`;
-            customCursor.style.top = `${e.clientY}px`;
-            showCursor();
         });
 
-        img.addEventListener('mouseleave', hideCursor);
+        img.addEventListener('mouseleave', () => {
+            customCursor.textContent = '•';
+        });
     });
 
-    document.addEventListener('mouseleave', hideCursor);
+    // Show cursor initially if mouse is already in the window
+    if (document.hasFocus()) {
+        showCursor();
+    }
 });
