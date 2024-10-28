@@ -62,7 +62,15 @@ h2 {
 }
 
 p {
+    max-width: 900px;
+    font-size: 18px;
+    line-height: 28px;
     margin: 0;
+    margin-bottom: 12px;
+}
+
+/* Adjust the last paragraph's margin if it's before the image gallery */
+p:last-of-type {
     margin-bottom: 24px;
 }
 
