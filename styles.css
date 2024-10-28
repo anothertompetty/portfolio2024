@@ -35,16 +35,59 @@ body {
 
 #theme-toggle {
     position: absolute;
-    top: 0; /* This will be adjusted */
+    top: 0;
     right: 20px;
     background: none;
     border: none;
-    font-size: 24px;
     cursor: pointer;
     padding: 8px;
     border-radius: 50%;
     transition: background-color 0.3s ease;
-    transform: translateY(calc(0.5rem + 2px)); /* Adjust this value to fine-tune alignment */
+    transform: translateY(calc(0.5rem + 2px));
+    color: var(--text-color);
+    position: relative;
+}
+
+#theme-toggle:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+/* Hide icons based on theme */
+[data-theme="light"] .dark-icon,
+[data-theme="dark"] .light-icon {
+    display: none;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: absolute;
+    background: var(--text-color);
+    color: var(--bg-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+}
+
+#theme-toggle:hover .tooltip {
+    opacity: 1;
+}
+
+/* Add tooltip text based on current theme */
+[data-theme="light"] .tooltip::before {
+    content: "Dark mode";
+}
+
+[data-theme="dark"] .tooltip::before {
+    content: "Light mode";
 }
 
 .content {
@@ -109,4 +152,10 @@ p:last-of-type {
 .text-content {
     margin-top: 120px;
     margin-bottom: 120px;
+}
+
+.image-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
