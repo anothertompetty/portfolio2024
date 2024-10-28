@@ -1,5 +1,5 @@
 :root[data-theme="light"] {
-    --bg-color: #ffffff;
+    --bg-color: #f8f8f8;
     --text-color: #000000;
     --cursor-bg: rgba(0, 0, 0, 0.7);
     --cursor-text: white;
@@ -34,7 +34,7 @@ body {
 header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: left;
     width: 100%;
     margin-bottom: 20px;
 }
