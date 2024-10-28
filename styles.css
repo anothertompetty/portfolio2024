@@ -13,7 +13,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'DM Mono', monospace;
     margin: 0;
     padding: 20px;
     display: flex;
@@ -47,13 +47,20 @@ body {
 }
 
 .content {
-    margin-top: 0; /* Remove the previous top margin */
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
+
+h1, h2 {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 500;
+    max-width: 900px;
 }
 
 h1 {
     margin: 0;
     margin-bottom: 8px;
-    line-height: 1; /* Add this to ensure consistent height */
 }
 
 h2 {
