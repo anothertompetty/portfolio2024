@@ -1,9 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
     const customCursor = document.getElementById('custom-cursor');
     const imageGallery = document.querySelector('.image-gallery');
+    const themeToggle = document.getElementById('theme-toggle');
     let isOverImage = false;
     let cursorHideTimeout;
     
+    // Theme toggle functionality
+    function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    }
+
+    // Set initial theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Theme toggle event listener
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Cursor functionality
     if (!customCursor || !imageGallery) {
         console.error('Custom cursor or image gallery element not found!');
         return;
@@ -28,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!isOverImage) {
                     customCursor.style.display = 'none';
                 }
-            }, 300); // Match this to your transition time
-        }, 50); // Small delay to prevent flickering
+            }, 300);
+        }, 50);
     }
 
     imageGallery.addEventListener('mousemove', (e) => {
@@ -50,6 +69,5 @@ document.addEventListener('DOMContentLoaded', function() {
         hideCursor();
     });
 
-    // Update cursor position even when not over images
     document.addEventListener('mousemove', updateCursorPosition);
 });
