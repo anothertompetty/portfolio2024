@@ -66,8 +66,25 @@ p {
     margin-bottom: 24px;
 }
 
-.image-gallery {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+#custom-cursor {
+    position: fixed;
+    pointer-events: none;
+    padding: 10px;
+    background-color: var(--cursor-bg);
+    color: var(--cursor-text);
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    display: none;
+}
+
+.image-gallery img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    cursor: none; /* Hide default cursor on images */
 }
