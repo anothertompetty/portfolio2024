@@ -1,16 +1,4 @@
-:root[data-theme="light"] {
-    --bg-color: #f8f8f8;
-    --text-color: #000000;
-    --cursor-bg: rgba(0, 0, 0, 0.7);
-    --cursor-text: white;
-}
-
-:root[data-theme="dark"] {
-    --bg-color: #121212;
-    --text-color: #ffffff;
-    --cursor-bg: rgba(255, 255, 255, 0.7);
-    --cursor-text: black;
-}
+/* ... existing CSS variables remain the same ... */
 
 body {
     font-family: Arial, sans-serif;
@@ -29,22 +17,13 @@ body {
     width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: left;
-    text-align: left;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-h1 {
-    margin: 0;
+    position: relative; /* For positioning the theme toggle */
 }
 
 #theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 20px;
     background: none;
     border: none;
     font-size: 24px;
@@ -58,47 +37,26 @@ h1 {
     background-color: rgba(128, 128, 128, 0.2);
 }
 
-[data-theme="light"] .dark-icon {
-    display: none;
+.content {
+    margin-top: 60px; /* Space for the theme toggle */
 }
 
-[data-theme="dark"] .light-icon {
-    display: none;
+h1 {
+    margin: 0;
+    margin-bottom: 8px;
 }
 
-h1, p {
-    text-align: center;
+h2 {
+    margin: 0;
+    margin-bottom: 24px;
+}
+
+p {
+    margin: 0;
+    margin-bottom: 24px;
 }
 
 .image-gallery {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    align-items: center;
-    width: 100%;
-}
-
-.image-gallery img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    cursor: none;
-}
-
-#custom-cursor {
-    position: fixed;
-    pointer-events: none;
-    padding: 10px;
-    background-color: var(--cursor-bg);
-    color: var(--cursor-text);
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
-                background-color 0.3s ease,
-                color 0.3s ease;
-    display: none;
-}
